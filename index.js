@@ -20,7 +20,13 @@ try { fs.accessSync('data');
 	  });
 
 	  for (i in dataFiles){
-	      var html = "";
+	      var html = '<link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html"><dom-module id="cheat-';
+
+	      //TODO deal with file names that have spaces, and special characters
+	      var elementName = dataFiles[i].slice(0,-4);
+	      html = html.concat(elementName);
+	      html = html.concat('"><template>');
+
 	      var dataLines = fs.readFileSync('data/'+dataFiles[i]).toString().split('\n');
 	      dataLines  = dataLines.filter(function(element){
 		  return element !== "";
@@ -31,9 +37,9 @@ try { fs.accessSync('data');
 	      var displayTitle =titleData[1];
 	      html = html.concat('<h1');
 	      if (['yes', 'Yes', 'True', 'true', '1'].includes(displayTitle)){
-		  html.concat('>');
+		  html = html.concat('>');
 	      } else {
-		  html.concat(' style="display:none;">');
+		  html = html.concat(' style="display:none;">');
 	      }	      
 	      html = html.concat(title);
 	      html = html.concat('</h1><ul>');
@@ -48,6 +54,10 @@ try { fs.accessSync('data');
 		  html = html.concat('</li>');
 	      }
 	      html = html.concat('</ul>')
+
+	      html = html.concat('</template><script>Polymer({ is: "cheat-'+ elementName + '"});</script></dom-module>');
+
+
 	      var fileTitle = dataFiles[i].slice(0,-4)+".html";
 	      //TODO: check if creates file if doesn't exist
 	      fs.writeFileSync("html/"+fileTitle, html);
