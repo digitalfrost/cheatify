@@ -4,6 +4,8 @@ var fs = require('fs');
 
 var  noData = "Could not find cheatsheet data to convert";
 
+fs.closeSync(fs.openSync('includeCheatFiles.html', 'w'));
+
 try {
     fs.statSync('html');
 } catch(error) {
@@ -20,6 +22,8 @@ try { fs.accessSync('data');
 	  });
 
 	  for (i in dataFiles){
+	      //Create html files
+
 	      var html = '<link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html"><dom-module id="cheat-';
 
 	      //TODO deal with file names that have spaces, and special characters
@@ -51,8 +55,11 @@ try { fs.accessSync('data');
 
 
 	      var fileTitle = dataFiles[i].slice(0,-4)+".html";
-	      //TODO: check if creates file if doesn't exist
 	      fs.writeFileSync("html/"+fileTitle, html);
+
+	      //Add new html file to include files
+	      var includeStatement = '<link rel="import" href="html/' + fileTitle +'" >';
+	      fs.appendFileSync('includeCheatFiles.html', includeStatement);
 
 	  }
 	  console.log('All files converted');
