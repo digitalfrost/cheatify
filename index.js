@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var  noData = "Could not find cheatsheet data to convert";
 
-fs.closeSync(fs.openSync('includeCheatFiles.html', 'w'));
+fs.closeSync(fs.openSync('importCheatFiles.html', 'w'));
 
 try {
     fs.statSync('html');
@@ -59,7 +59,7 @@ try { fs.accessSync('data');
 
 	      //Add new html file to include files
 	      var includeStatement = '<link rel="import" href="html/' + fileTitle +'" >';
-	      fs.appendFileSync('includeCheatFiles.html', includeStatement);
+	      fs.appendFileSync('importCheatFiles.html', includeStatement);
 
 	  }
 	  console.log('All files converted');
