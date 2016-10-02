@@ -35,12 +35,7 @@ try { fs.accessSync('data');
 	      var titleData = titleLine.split('|');
 	      var title = titleData[0];
 	      var displayTitle =titleData[1];
-	      html = html.concat('<h1');
-	      if (['yes', 'Yes', 'True', 'true', '1'].includes(displayTitle)){
-		  html = html.concat('>');
-	      } else {
-		  html = html.concat(' style="display:none;">');
-	      }	      
+	      html = html.concat('<h1>');
 	      html = html.concat(title);
 	      html = html.concat('</h1><ul>');
 	      for (j in dataLines){
