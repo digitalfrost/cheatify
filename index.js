@@ -31,10 +31,7 @@ try { fs.accessSync('data');
 	      dataLines  = dataLines.filter(function(element){
 		  return element !== "";
 	      }); //remove empty lines
-	      var titleLine = dataLines.shift();
-	      var titleData = titleLine.split('|');
-	      var title = titleData[0];
-	      var displayTitle =titleData[1];
+	      var title = dataLines.shift();
 	      html = html.concat('<h1>');
 	      html = html.concat(title);
 	      html = html.concat('</h1><ul>');
@@ -43,7 +40,7 @@ try { fs.accessSync('data');
 		  var priority = data[0];
 		  var command = data[1];
 		  var description = data[2];
-		  html = html.concat('<li class="priority-'+priority+'">');
+		  html = html.concat('<li id="'+title.replace(/ /g,'')+'-'+j+'" class="priority-'+priority+'">');
 		  html = html.concat('<span class="command">'+command+'</span>');
 		  html = html.concat('<span class="description">'+description+'</span>');
 		  html = html.concat('</li>');
