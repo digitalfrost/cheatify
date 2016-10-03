@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Converts cheatify text files to html",
   "main": "index.js",
+  "bin": {
+    "cheatify" : "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
